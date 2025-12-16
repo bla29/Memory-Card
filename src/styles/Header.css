@@ -1,0 +1,23 @@
+#root {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.header-layout {
+    width: 100%;
+    background-color: aqua;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.score-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.description {
+    text-align: left;
+}
