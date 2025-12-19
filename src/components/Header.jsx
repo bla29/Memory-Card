@@ -1,6 +1,6 @@
 import '../styles/Header.css'
 
-export default function Header() {
+export default function Header({ count }) {
     return (
         <div className='header-layout'>
             <div className='description'>
@@ -8,7 +8,7 @@ export default function Header() {
                 <p>Get points by clicking on an image but don't click on any image more than once!</p>
             </div>
             <div className='score-section'>
-                <p>Score: 1</p>
+                <p>Score: {count}</p>
                 <p>Best Score: 8</p>
             </div>
         </div>
