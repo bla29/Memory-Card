@@ -1,6 +1,6 @@
 import '../styles/Header.css'
 
-export default function Header({ count }) {
+export default function Header({ count, score }) {
     return (
         <div className='header-layout'>
             <div className='description'>
@@ -9,7 +9,7 @@ export default function Header({ count }) {
             </div>
             <div className='score-section'>
                 <p>Score: {count}</p>
-                <p>Best Score: 8</p>
+                <p>Best Score: {score}</p>
             </div>
         </div>
     )

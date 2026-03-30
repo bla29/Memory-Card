@@ -1,7 +1,7 @@
 import '../styles/Cards.css'
 import { useState, useEffect } from 'react'
 
-export default function Cards({ count, setCount }) {
+export default function Cards({ count, setCount, score, setScore }) {
     const [images, setImages] = useState([]);
     const [clickedKey, setClicked] = useState(null);
 
@@ -41,7 +41,9 @@ export default function Cards({ count, setCount }) {
             setClicked(key);
         }
         if (key == clickedKey) {
-            //update best score = count;
+            if (count > score) {
+                setScore(count)
+            }
             setCount(0);
             setClicked(null);
         } else {
