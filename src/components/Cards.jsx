@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 export default function Cards({ count, setCount }) {
     const [images, setImages] = useState([]);
+    const [clickedKey, setClicked] = useState(null);
 
     useEffect(() => {
         const fetchImagesSequentially = async () => {
@@ -12,7 +13,12 @@ export default function Cards({ count, setCount }) {
                 const res = await fetch("https://picsum.photos/220");
                 const blob = await res.blob();
                 const imageUrl = URL.createObjectURL(blob);
-                results.push(imageUrl);
+                const imageKey = crypto.randomUUID();
+                const image = {
+                    url: imageUrl,
+                    key: imageKey
+                }
+                results.push(image);
             }
 
             setImages(results);
@@ -21,18 +27,36 @@ export default function Cards({ count, setCount }) {
         fetchImagesSequentially();
     }, []);
 
-    const imagesList = images.map((image, index) => {
+    const imagesList = images.map((image) => {
         return (
-            <button className='card' key={index} onClick={handleClick}>
-                <img src={image} key={index} />
+            <button className='card' key={image.key} onClick={() => handleClick(image.key)}>
+                <img src={image.url} />
                 <p>Click me!</p>
             </button>
         )
     })
 
-    function handleClick() {
-        let newCount = count + 1;
-        setCount(newCount);
+    function handleClick(key) {
+        if (clickedKey == null) {
+            setClicked(key);
+        }
+        if (key == clickedKey) {
+            //update best score = count;
+            setCount(0);
+            setClicked(null);
+        } else {
+            let newCount = count + 1;
+            setCount(newCount);
+        }
+        newImage();
+        console.log('Key: ' + key);
+        console.log('Clicked Key: ' + clickedKey);
+    }
+
+    async function newImage(key) {
+        let randomizeArr = images;
+        randomizeArr = shuffleArray(randomizeArr)
+        setImages(randomizeArr);
     }
 
     return (
@@ -40,4 +64,15 @@ export default function Cards({ count, setCount }) {
             {imagesList}
         </div>
     )
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
