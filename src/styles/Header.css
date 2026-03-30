@@ -1,16 +1,16 @@
 #root {
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
 }
 
 .header-layout {
-    width: 100%;
     background-color: aqua;
     display: flex;
     justify-content: space-between;
     padding: 10px;
+    margin-bottom: 15px;
 }
 
 .score-section {
